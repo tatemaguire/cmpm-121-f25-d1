@@ -3,3 +3,11 @@
   vertical-align: top;
   border: 1px solid salmon;
 }
+
+#tongue {
+  font-size: 80px;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  cursor: url("./cheezit.cur"), auto;
+}
