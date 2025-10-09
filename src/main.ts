@@ -14,3 +14,8 @@ buttonElement.addEventListener("click", () => {
   cheezitCount++;
   counterElement.innerText = cheezitCount.toString();
 });
+
+setInterval(() => {
+  cheezitCount++;
+  counterElement.innerText = cheezitCount.toString();
+}, 1000);
