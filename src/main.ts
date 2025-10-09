@@ -1,9 +1,16 @@
-import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
 document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-  <button id="tongue">😛</button>
+  <header style="font-size:100px">Cheez-it Eating Simulator</header>
+  <button id="tongue-button">😛</button>
+  <div>You ate <span id="counter">0</span> cheez-its</div>
 `;
 
-console.log(document.body.style);
+const buttonElement: HTMLElement = document.getElementById("tongue-button")!;
+const counterElement: HTMLElement = document.getElementById("counter")!;
+let cheezitCount = 0;
+
+buttonElement.addEventListener("click", () => {
+  cheezitCount++;
+  counterElement.innerText = cheezitCount.toString();
+});

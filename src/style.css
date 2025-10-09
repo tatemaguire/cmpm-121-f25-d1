@@ -1,13 +1,15 @@
-.icon {
-  width: 64px;
-  vertical-align: top;
-  border: 1px solid salmon;
+body {
+  text-align: center;
+  font-size: 40px;
 }
 
-#tongue {
-  font-size: 80px;
+#tongue-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 150px;
   text-align: center;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   cursor: url("./cheezit.cur"), auto;
 }
