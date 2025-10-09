@@ -9,13 +9,28 @@ document.body.innerHTML = `
 const buttonElement: HTMLElement = document.getElementById("tongue-button")!;
 const counterElement: HTMLElement = document.getElementById("counter")!;
 let cheezitCount = 0;
+// deno-lint-ignore prefer-const
+let autofeederRate = 1; // in chzits per second
 
 buttonElement.addEventListener("click", () => {
-  cheezitCount++;
-  counterElement.innerText = cheezitCount.toString();
+  increaseCheezitCount(1);
 });
 
-setInterval(() => {
-  cheezitCount++;
-  counterElement.innerText = cheezitCount.toString();
-}, 1000);
+function increaseCheezitCount(count: number) {
+  cheezitCount += count;
+  counterElement.innerText = cheezitCount.toFixed(2);
+}
+
+let lastTimestamp: number;
+function autofeederUpdate(timestamp: number) {
+  const dt = timestamp - lastTimestamp;
+  lastTimestamp = timestamp;
+  increaseCheezitCount((dt / 1000) * autofeederRate);
+
+  requestAnimationFrame(autofeederUpdate);
+}
+// initial request to initialize lastTimestamp
+requestAnimationFrame((timestamp) => {
+  lastTimestamp = timestamp;
+  requestAnimationFrame(autofeederUpdate);
+});
