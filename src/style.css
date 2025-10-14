@@ -7,8 +7,11 @@ p {
   font-size: 25px;
 }
 
-.upgradeButton {
-  font-size: 30px;
+#autofeederButtons button {
+  font-size: 40px;
+  display: block;
+  margin: auto;
+  margin-top: 5px;
 }
 
 #tongue-button {
