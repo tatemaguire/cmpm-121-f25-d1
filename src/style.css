@@ -7,11 +7,29 @@ p {
   font-size: 25px;
 }
 
+#counter {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  color: sienna;
+}
+
+#chzitRate {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  color: sienna;
+}
+
 #autofeederButtons button {
   font-size: 40px;
   display: block;
   margin: auto;
   margin-top: 5px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#afDescription {
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 #tongue-button {
@@ -26,7 +44,7 @@ p {
 }
 
 #tongue-button:focus {
-  animation: tongue-react 1s linear;
+  animation: tongue-react 0.6s ease-out;
 }
 
 #tongue-button:active {

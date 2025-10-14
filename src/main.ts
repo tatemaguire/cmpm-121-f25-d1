@@ -7,12 +7,14 @@ document.body.innerHTML = `
   <p>You are being fed <span id="chzitRate">0</span> cheez-its per second</p>
   <h>AUTOFEEDERS</h>
   <div id="autofeederButtons"></div>
+  <div id="afDescription"></div>
 `;
 
 interface Item {
   name: string;
   cost: number;
   rate: number;
+  description: string;
 }
 
 interface AFData {
@@ -26,15 +28,43 @@ function AFString(af: AFData) {
 }
 
 const availableItems: Item[] = [
-  { name: "MK.I", cost: 10, rate: 0.1 },
-  { name: "MK.II", cost: 100, rate: 2 },
-  { name: "MK.III", cost: 1000, rate: 50 },
+  {
+    name: "Flinger",
+    cost: 10,
+    rate: 0.1,
+    description: "Flings cheezits in your general direction. Usually misses.",
+  },
+  {
+    name: "Scooper",
+    cost: 50,
+    rate: 2,
+    description: "Scoops cheezits into your mouth one by one.",
+  },
+  {
+    name: "Cannon",
+    cost: 400,
+    rate: 50,
+    description: "Launches cheezits into your mouth with decent accuracy",
+  },
+  {
+    name: "Goldfish",
+    cost: 6700,
+    rate: -1,
+    description: "Disgusting.",
+  },
+  {
+    name: "IV",
+    cost: 10000,
+    rate: 400,
+    description: "Injects pulverized cheezits directly into your bloodstream.",
+  },
 ];
 
 const tongueButton = document.getElementById("tongue-button")!;
 const counterElement = document.getElementById("counter")!;
 const autofeederButtonsDiv = document.getElementById("autofeederButtons")!;
 const rateElement = document.getElementById("chzitRate")!;
+const descriptionElement = document.getElementById("afDescription")!;
 
 let cheezitCount = 0;
 
@@ -57,6 +87,7 @@ tongueButton.addEventListener("click", () => {
   increaseCheezitCount(1);
 });
 
+// set up button behavior
 for (const af of autofeederData) {
   af.buttonElem.addEventListener("click", () => {
     if (cheezitCount >= af.itemData.cost) {
@@ -65,6 +96,12 @@ for (const af of autofeederData) {
       af.itemData.cost *= 1.15;
       af.buttonElem.innerText = AFString(af);
     }
+  });
+  af.buttonElem.addEventListener("mouseover", () => {
+    descriptionElement.innerText = af.itemData.description;
+  });
+  af.buttonElem.addEventListener("mouseout", () => {
+    descriptionElement.innerText = "";
   });
 }
 
