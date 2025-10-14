@@ -15,19 +15,16 @@ interface Item {
   cost: number;
   rate: number;
   description: string;
-}
-
-interface AFData {
-  itemData: Item;
   count: number;
   buttonElem: HTMLButtonElement;
 }
 
-function AFString(af: AFData) {
-  return af.itemData.name + " " + af.itemData.cost.toFixed(2);
+function ItemString(af: Item) {
+  return af.name + " " + af.cost.toFixed(2);
 }
 
-const availableItems: Item[] = [
+// describes the items available to purchase, not the actual data used by the code
+const config = [
   {
     name: "Flinger",
     cost: 10,
@@ -60,6 +57,7 @@ const availableItems: Item[] = [
   },
 ];
 
+// Element references
 const tongueButton = document.getElementById("tongue-button")!;
 const counterElement = document.getElementById("counter")!;
 const autofeederButtonsDiv = document.getElementById("autofeederButtons")!;
@@ -68,57 +66,65 @@ const descriptionElement = document.getElementById("afDescription")!;
 
 let cheezitCount = 0;
 
-const autofeederData: AFData[] = [];
-for (const item of availableItems) {
+// create availableItems using config
+const availableItems: Item[] = [];
+for (const c of config) {
   const button = document.createElement("button");
   autofeederButtonsDiv.appendChild(button);
 
-  const af = {
-    itemData: item,
+  const af: Item = {
+    name: c.name,
+    cost: c.cost,
+    rate: c.rate,
+    description: c.description,
     count: 0,
     buttonElem: button,
   };
-  autofeederData.push(af);
+  availableItems.push(af);
 
-  button.innerText = AFString(af);
+  button.innerText = ItemString(af);
 }
 
-tongueButton.addEventListener("click", () => {
-  increaseCheezitCount(1);
-});
-
-// set up button behavior
-for (const af of autofeederData) {
+// set up autofeeder button behavior
+for (const af of availableItems) {
   af.buttonElem.addEventListener("click", () => {
-    if (cheezitCount >= af.itemData.cost) {
-      cheezitCount -= af.itemData.cost;
+    if (cheezitCount >= af.cost) {
+      cheezitCount -= af.cost;
       af.count++;
-      af.itemData.cost *= 1.15;
-      af.buttonElem.innerText = AFString(af);
+      af.cost *= 1.15;
+      af.buttonElem.innerText = ItemString(af);
     }
   });
   af.buttonElem.addEventListener("mouseover", () => {
-    descriptionElement.innerText = af.itemData.description;
+    descriptionElement.innerText = af.description;
   });
   af.buttonElem.addEventListener("mouseout", () => {
     descriptionElement.innerText = "";
   });
 }
 
+// set up main button
+tongueButton.addEventListener("click", () => {
+  increaseCheezitCount(1);
+});
+
+// calculate rate from current upgrade counts
 function getAutofeederRate() {
   let autofeederRate = 0;
-  for (const af of autofeederData) {
-    autofeederRate += af.count * af.itemData.rate;
+  for (const af of availableItems) {
+    autofeederRate += af.count * af.rate;
   }
   rateElement.innerText = autofeederRate.toFixed(2);
   return autofeederRate;
 }
 
+// increase variable and also update screen
 function increaseCheezitCount(count: number) {
   cheezitCount += count;
   counterElement.innerText = cheezitCount.toFixed(2);
 }
 
+// applies autofeederRate to the cheezit count
 let lastTimestamp: number;
 function autofeederUpdate(timestamp: number) {
   const dt = timestamp - lastTimestamp;
