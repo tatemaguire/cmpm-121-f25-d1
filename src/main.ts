@@ -2,7 +2,7 @@ import "./style.css";
 
 document.body.innerHTML = `
   <header style="font-size:100px">Cheez-it Eating Simulator</header>
-  <button id="tongue-button">😛</button>
+  <button id="tongue-button">😒</button>
   <p>You ate <span id="counter">0</span> cheez-its</p>
   <p>You are being fed <span id="chzitRate">0</span> cheez-its per second</p>
   <h>AUTOFEEDERS</h>
@@ -65,6 +65,14 @@ const rateElement = document.getElementById("chzitRate")!;
 const descriptionElement = document.getElementById("afDescription")!;
 
 let cheezitCount = 0;
+
+tongueButton.addEventListener("mouseover", () => {
+  tongueButton.innerText = "😛";
+});
+
+tongueButton.addEventListener("mouseout", () => {
+  tongueButton.innerText = "😒";
+});
 
 // create availableItems using config
 const availableItems: Item[] = [];
