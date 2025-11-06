@@ -1,14 +1,20 @@
 import "./style.css";
 
 document.body.innerHTML = `
-  <header style="font-size:100px">Cheez-it Eating Simulator</header>
-  <button id="tongue-button">😒</button>
-  <p>You ate <span id="counter">0</span> cheez-its</p>
-  <p>You are being fed <span id="chzitRate">0</span> cheez-its per second</p>
-  <h>AUTOFEEDERS</h>
-  <div id="autofeederButtons"></div>
-  <div id="afDescription"></div>
+  <div id="everything">
+    <header style="font-size:100px">Cheez-it Eating Simulator</header>
+    <button id="tongue-button">😒</button>
+    <p>You ate <span id="counter">0</span> cheez-its</p>
+    <p>You are being fed <span id="chzitRate">0</span> cheez-its per second</p>
+    <h>AUTOFEEDERS</h>
+    <div id="autofeederButtons"></div>
+    <div id="afDescription"></div>
+  </div>
 `;
+document.body.style.backgroundColor = "hsla(0, 73%, 56%, 1.00)";
+const everything = document.getElementById("everything") as HTMLDivElement;
+everything.style.backgroundColor = "hsla(0, 100%, 81%, 1.00)";
+everything.style.margin = "50px";
 
 interface Item {
   name: string;
