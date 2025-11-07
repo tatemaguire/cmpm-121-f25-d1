@@ -6,4 +6,5 @@ This is what it's like to eat cheezits. Made by Tate Maguire for a class assignm
 
 My peers and their beautiful webpages inspired me deeply to alter the following parts of my project.
 
-Colored background: [fractalizes](https://github.com/fractalizes/cmpm-121-f25-d1)
+- Colored background: [fractalizes](https://github.com/fractalizes/cmpm-121-f25-d1)
+- Chomp SFX: [jellyb3e](https://github.com/jellyb3e/cmpm-121-f25-d1-juliamanou)

@@ -2,6 +2,7 @@ import "./style.css";
 
 document.body.innerHTML = `
   <div id="everything">
+    <audio id="chompSFX" src="./src/chomp.wav" type="audio/wav" preload="auto"></audio>
     <header style="font-size:100px">Cheez-it Eating Simulator</header>
     <button id="tongue-button">😒</button>
     <p>You ate <span id="counter">0</span> cheez-its</p>
@@ -69,6 +70,7 @@ const counterElement = document.getElementById("counter")!;
 const autofeederButtonsDiv = document.getElementById("autofeederButtons")!;
 const rateElement = document.getElementById("chzitRate")!;
 const descriptionElement = document.getElementById("afDescription")!;
+const chompSFX = document.getElementById("chompSFX") as HTMLAudioElement;
 
 let cheezitCount = 0;
 
@@ -120,6 +122,7 @@ for (const af of availableItems) {
 // set up main button
 tongueButton.addEventListener("click", () => {
   increaseCheezitCount(1);
+  chompSFX.play();
 });
 
 // calculate rate from current upgrade counts
